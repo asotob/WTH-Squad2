@@ -22,5 +22,5 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: RG_Squad2_Challenge5
         template: InfrastructureAsCode/main.bicep
-       # parameters: mystorageAccountName=mystoragemx01
+        parameters: InfrastructureAsCode/parameters.json
         failOnStdErr: false
