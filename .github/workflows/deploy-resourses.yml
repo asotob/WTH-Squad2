@@ -22,6 +22,6 @@ jobs:
     - name: Deploy Bicep file
       uses: azure/CLI@v1
       with:
-        azcliversion: 2.0.72
+       # azcliversion: 2.0.72
         inlineScript: |
           az deployment group create --resource-group RG_Squad2_Challenge5 --template-file InfrastructureAsCode/main.json
