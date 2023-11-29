@@ -24,4 +24,4 @@ jobs:
       with:
         azcliversion: 2.0.72
         inlineScript: |
-          az deployment group create --resource-group RG_Squad2_Challenge5 --template-file main.json
+          az deployment group create --resource-group RG_Squad2_Challenge5 --template-file InfrastructureAsCode/main.json
