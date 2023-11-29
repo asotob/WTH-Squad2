@@ -1,0 +1,34 @@
+on:
+  issues:
+    types: [opened, edited, milestoned]
+    
+# issue_comment:
+#   types: [created, deleted]
+#   name: Issue Commented 3
+#   if: ${{ !github.event.issue.pull_request }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: |
+#          echo A comment on issue $NUMBER
+#        env:
+#          NUMBER: ${{ github.event.issue.number }}
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step one
+      run: echo "Log from step one"
+    - name: Step two
+      run: echo "Log from step two"
+      
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: CowSays
+      uses: mscoutermarsh/cowsays-action@master
+      with:
+        text: 'Moo!'
+        color: 'red'
