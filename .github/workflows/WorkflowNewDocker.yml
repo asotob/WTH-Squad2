@@ -7,7 +7,7 @@ env:
   registryName: tqwsssdbmov7qwthreg
   repositoryName: dockertestimage
   dockerFolderPath: Application/src/RazorPagesTestSample/
-  tag: ${{github.run_number}}
+  tag: ${{ github.sha }}
   ACR_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   image_name: oapi
   login_server: tqwsssdbmov7qwthreg.azurecr.io
@@ -46,5 +46,5 @@ jobs:
       - name: Build and Push Image to ACR
         #working-directory: src
         run: |
-          docker build ${{env.dockerFolderPath}} -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
+          docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} ${{ env.dockerFolderPath }}
           docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
