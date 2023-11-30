@@ -46,5 +46,7 @@ jobs:
       - name: Build and Push Image to ACR
         #working-directory: src
         run: |
-          docker build -f ${{ env.dockerFolderPath }} -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
+        cd Application/src/RazorPagesTestSample/
+        ls -l
+          docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
           docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
