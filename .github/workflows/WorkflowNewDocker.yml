@@ -45,9 +45,8 @@ jobs:
           login-server: ${{ env.login_server }}
           
       - name: Build and Push Image to ACR
-        #working-directory: src
         run: |
-     #     cd Application/src/RazorPagesTestSample/
-     #     ls -l
-          /${{dockerFolderPath}}/docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
-          /${{dockerFolderPath}}/docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
+          cd Application/src/RazorPagesTestSample/
+          ls -l
+          docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
+          docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
