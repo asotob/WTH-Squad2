@@ -24,6 +24,6 @@ jobs:
       
       run: dotnet restore  ./Application/src/RazorPagesTestSample/RazorPagesTestSample.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore  ./Application/src/RazorPagesTestSample/RazorPagesTestSample.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal  ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.sln
