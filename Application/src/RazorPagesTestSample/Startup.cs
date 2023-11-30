@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RazorPagesTestSample.Data;
-
+// test
 namespace RazorPagesTestSample
 {
     public class Startup
