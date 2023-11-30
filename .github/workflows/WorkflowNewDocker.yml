@@ -6,7 +6,7 @@ name: Build and Push image to ACR
 env:
   registryName: tqwsssdbmov7qwthreg
   repositoryName: dockertestimage
-  dockerFolderPath: Application/src/RazorPagesTestSample/
+  dockerFolderPath: Application/src/RazorPagesTestSample
   tag: ${{ github.sha }}
   #tag: latest
   ACR_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
@@ -61,6 +61,7 @@ jobs:
           
       - name: Build and Push Image to ACR
         run: |
+          cd Application/src/RazorPagesTestSample/
           ls -l
-          {{$dockerFolderPath}}docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
-          {{$dockerFolderPath}}docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
+          $dockerFolderPath/docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
+          $dockerFolderPath/docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
