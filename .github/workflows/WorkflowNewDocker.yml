@@ -4,11 +4,24 @@ name: Build and Push image to ACR
 on: workflow_dispatch
 
 env:
+  registryName: tqwsssdbmov7qwthreg
+  repositoryName: dockertestimage
+  dockerFolderPath: Application/src/RazorPagesTestSample/
+  tag: ${{github.run_number}}
   ACR_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   image_name: oapi
-  #tag: ${{ github.sha }}
-  tag: 7999
+  login_server: tqwsssdbmov7qwthreg.azurecr.io
 
+#on:
+#  push:
+#    branches: [ main ]
+#    paths: Application/*
+#  pull_request:
+#    branches: [ main ]
+#    paths: Application/*
+  # Allows you to run this workflow manually from the Actions tab
+#  workflow_dispatch:
+  
 jobs:
   # This workflow contains a job called "build"
   build:
@@ -24,14 +37,14 @@ jobs:
         uses: Azure/docker-login@v1
         with:
           # Container registry username
-          username: ${{ secrets.ACR_USERNAME }}
+          username: ${{ secrets.USER_NAME }}
           # Container registry password
-          password: ${{ secrets.ACR_PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
           # Container registry server url
-          login-server: ${{ env.ACR_REGISTRY }}
+          login-server: ${{ env.login_server }}
           
       - name: Build and Push Image to ACR
         #working-directory: src
         run: |
-          docker build . -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
+          docker build ${{env.dockerFolderPath}} -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
           docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
