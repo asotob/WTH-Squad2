@@ -1,31 +1,45 @@
 name: Build and Push image to ACR
 
 # Controls when the workflow will run
-on: workflow_dispatch
+# on: workflow_dispatch
 
 env:
   registryName: tqwsssdbmov7qwthreg
   repositoryName: dockertestimage
   dockerFolderPath: Application/src/RazorPagesTestSample/
-  #tag: ${{ github.sha }}
-  tag: latest
+  tag: ${{ github.sha }}
+  #tag: latest
   ACR_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   image_name: dockertestimage
   login_server: tqwsssdbmov7qwthreg.azurecr.io
 
-#on:
-#  push:
-#    branches: [ main ]
-#    paths: Application/*
-#  pull_request:
-#    branches: [ main ]
-#    paths: Application/*
-  # Allows you to run this workflow manually from the Actions tab
-#  workflow_dispatch:
-  
+on:
+  push:
+    branches: [ "main" ]
+    paths: 'Application/**'
+  pull_request:
+    branches: [ "main" ]
+    paths: 'Application/**'
+  workflow_dispatch:
+    
 jobs:
   # This workflow contains a job called "build"
-  build:
+  build1:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Build
+      run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+    
+  build2:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
