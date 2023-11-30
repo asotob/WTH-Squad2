@@ -94,11 +94,11 @@ jobs:
           docker build -t ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }} .
           docker push ${{ env.ACR_REGISTRY }}/${{ env.image_name }}:${{ env.tag }}
 
-  deploy1:
+  build3:
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    needs: build
+    needs: build2
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
