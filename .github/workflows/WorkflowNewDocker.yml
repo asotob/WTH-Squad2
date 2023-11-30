@@ -40,6 +40,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
     
   build2:
+    needs: build1
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
