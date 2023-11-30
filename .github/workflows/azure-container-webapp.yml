@@ -109,7 +109,7 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.PASSWORD }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           # Container registry password
           # password: ${{ secrets.PASSWORD }}       
       - name: Deploy to Azure Web App
