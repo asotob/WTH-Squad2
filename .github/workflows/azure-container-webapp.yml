@@ -37,6 +37,7 @@ env:
   ACR_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
   image_name: dockertestimage
   login_server: tqwsssdbmov7qwthreg.azurecr.io
+  credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
 on:
   push:
@@ -109,7 +110,7 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          credentials: ${{ secrets.AZURE_CREDENTIALS }}
           # Container registry password
           # password: ${{ secrets.PASSWORD }}       
       - name: Deploy to Azure Web App
